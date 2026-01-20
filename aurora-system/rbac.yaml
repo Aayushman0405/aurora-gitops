@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: aurora-reader
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get", "list"]
+- apiGroups: ["storage.k8s.io"]
+  resources: ["storageclasses"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: aurora-reader-binding
+subjects:
+- kind: ServiceAccount
+  name: aurora-sa
+  namespace: aurora-system
+roleRef:
+  kind: ClusterRole
+  name: aurora-reader
+  apiGroup: rbac.authorization.k8s.io
