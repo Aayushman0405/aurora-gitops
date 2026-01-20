@@ -12,38 +12,29 @@ spec:
     metadata:
       labels:
         app: aurora
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: aurora-sa
       containers:
       - name: aurora
         image: aayud/aurora-platform:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
-containers:
-- name: aurora
-  image: aayud/aurora-platform:latest
-  ports:
-  - containerPort: 8000
 
-  readinessProbe:
-    httpGet:
-      path: /health
-      port: 8000
-    initialDelaySeconds: 5
-    periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
 
-  livenessProbe:
-    httpGet:
-      path: /health
-      port: 8000
-    initialDelaySeconds: 15
-    periodSeconds: 10
-
-metadata:
-  labels:
-    app: aurora
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "8000"
-    prometheus.io/path: "/metrics"
-    
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
