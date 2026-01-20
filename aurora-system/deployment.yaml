@@ -19,3 +19,22 @@ spec:
         image: aayud/aurora-platform:latest
         ports:
         - containerPort: 8000
+containers:
+- name: aurora
+  image: aayud/aurora-platform:latest
+  ports:
+  - containerPort: 8000
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 5
+    periodSeconds: 5
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 15
+    periodSeconds: 10
