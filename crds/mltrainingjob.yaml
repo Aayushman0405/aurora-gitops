@@ -10,21 +10,21 @@ spec:
     singular: mltrainingjob
     kind: MLTrainingJob
     shortNames:
-    - mltj
+      - mltj
   versions:
-  - name: v1alpha1
-    served: true
-    storage: true
-    schema:
-      openAPIV3Schema:
-        type: object
-        properties:
-          spec:
-            type: object
-            properties:
-              modelName:
-                type: string
-              dataset:
-                type: string
-              algorithm:
-                type: string
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                modelName:
+                  type: string
+                dataset:
+                  type: string
+                algorithm:
+                  type: string
