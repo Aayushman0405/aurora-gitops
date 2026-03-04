@@ -1,0 +1,18 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: aurora-s3-user
+  namespace: rook-ceph
+spec:
+  store: mlflow-store
+  displayName: "Aurora S3 User"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aurora-s3-creds
+  namespace: aurora-system
+type: Opaque
+stringData:
+  AWS_ACCESS_KEY_ID: ""  # Will be populated by operator
+  AWS_SECRET_ACCESS_KEY: ""  # Will be populated by operator
